@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Approve Students</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+  <h2>Pending Approvals</h2>
+  <ul id="list"></ul>
+</div>
+
+<script>
+fetch("http://localhost:3000/pending")
+.then(res => res.json())
+.then(data => {
+  data.forEach(u => {
+    list.innerHTML += `
+      <li>${u.email}
+        <button onclick="approve('${u.email}')">Approve</button>
+      </li>`;
+  });
+});
+
+function approve(email) {
+  fetch("http://localhost:3000/approve", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ email })
+  }).then(() => location.reload());
+}
+</script>
+
+</body>
+</html>

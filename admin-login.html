@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+  <h2>Admin Login</h2>
+
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+
+  <button onclick="adminLogin()">Login</button>
+  <p id="msg" class="error"></p>
+</div>
+
+<script>
+function adminLogin() {
+  if (user.value === "registrar" && pass.value === "reg123") {
+    window.location = "approve.html";
+  }
+  else if (user.value === "chairman" && pass.value === "8179849") {
+    window.location = "chairman.html";
+  }
+  else {
+    document.getElementById("msg").innerText = "Invalid admin credentials";
+  }
+}
+</script>
+
+</body>
+</html>
+
+

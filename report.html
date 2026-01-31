@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Report Issue</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Report an Issue</h2>
+
+  <label>Issue Type</label>
+  <select id="type">
+    <option value="Hostel">Hostel</option>
+    <option value="Faculty">Faculty</option>
+    <option value="Infrastructure">Infrastructure</option>
+    <option value="Sensitive">Sensitive</option>
+  </select>
+
+  <label>Description</label>
+  <textarea id="issue" placeholder="Describe your issue clearly"></textarea>
+
+  <button onclick="submitIssue()">Submit Issue</button>
+
+  <p id="msg"></p>
+</div>
+
+<script>
+function submitIssue() {
+  const type = document.getElementById("type").value;
+  const issue = document.getElementById("issue").value;
+
+  if(issue.trim() === ""){
+    document.getElementById("msg").innerText = "Please describe the issue.";
+    return;
+  }
+
+  fetch("http://localhost:3000/report", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      type: type,
+      issue: issue
+    })
+  })
+  .then(() => {
+    window.location.href = "success.html";
+  })
+  .catch(err => {
+    document.getElementById("msg").innerText = "Server not running!";
+  });
+}
+</script>
+
+</body>
+</html>
